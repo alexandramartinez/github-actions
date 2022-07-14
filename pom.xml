@@ -15,6 +15,8 @@
 
 		<app.runtime>4.4.0-20220420</app.runtime>
 		<mule.maven.plugin.version>3.5.4</mule.maven.plugin.version>
+		<app.name>amartinez-github-actions</app.name>
+		<env>Sandbox</env>
 	</properties>
 
 	<build>
@@ -30,18 +32,19 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-				<cloudHubDeployment>
-					<uri>https://anypoint.mulesoft.com</uri>
-					<muleVersion>4.4.0</muleVersion>
-					<username>${anypoint.username}</username>
-					<password>${anypoint.password}</password>
-					<applicationName>amartinez-github-actions</applicationName>
-					<environment>Sandbox</environment>
-					<workerType>MICRO</workerType>
-					<region>us-east-2</region>
-					<workers>1</workers>
-					<objectStoreV2>true</objectStoreV2>
-				</cloudHubDeployment>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${app.runtime}</muleVersion>
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
+						<applicationName>${app.name}</applicationName>
+						<environment>${env}</environment>
+						<workerType>MICRO</workerType>
+						<region>us-east-2</region>
+						<workers>1</workers>
+						<objectStoreV2>true</objectStoreV2>
+					</cloudHubDeployment>
+					<classifier>mule-application</classifier>
 				</configuration>
 			</plugin>
 		</plugins>
