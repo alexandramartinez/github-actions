@@ -43,6 +43,11 @@
 						<region>us-east-2</region>
 						<workers>1</workers>
 						<objectStoreV2>true</objectStoreV2>
+						<!-- Start: SECURED PROPERTIES CI/CD -->
+						<properties>
+							<key>${secure.key}</key>
+						</properties>
+						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
 				</configuration>
@@ -63,12 +68,14 @@
 			<version>1.2.2</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
+		<!-- Start: SECURED PROPERTIES CI/CD -->
 		<dependency>
 			<groupId>com.mulesoft.modules</groupId>
 			<artifactId>mule-secure-configuration-property-module</artifactId>
 			<version>1.2.5</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
+		<!-- End: SECURED PROPERTIES CI/CD -->
 	</dependencies>
 
 	<repositories>

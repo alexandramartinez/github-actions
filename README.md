@@ -30,7 +30,7 @@ The password you use to log in to Anypoint Platform:
 ANYPOINT_PLATFORM_PASSWORD
 ```
 
-Set up the following `build.yml` at `.github/workflows`
+Set up the following `build.yml` at `.github/workflows`:
 
 ```yaml
 name: Build and Deploy to Sandbox
@@ -123,9 +123,59 @@ The decryption key you use to encrypt/decrypt the properties:
 DECRYPTION_KEY
 ```
 
-Set up the following `build.yml` at `.github/workflows`
+Add the following snippet into your application's `pom.xml`, under the `cloudHubDeployment` configuration:
 
-> Make sure you replace the name of the property to match your application in the last line. In this example, our key is called `secure.key`.
+```xml
+<properties>
+  <key>${secure.key}</key>
+</properties>
+```
+
+> Make sure you replace the name of the key to match your application's property. In this example, our key is called `secure.key`.
+
+It should look like this:
+
+```xml
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.mule.tools.maven</groupId>
+        <artifactId>mule-maven-plugin</artifactId>
+        <version>${mule.maven.plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <cloudHubDeployment>
+            <uri>https://anypoint.mulesoft.com</uri>
+            <muleVersion>${app.runtime}</muleVersion>
+            <username>${anypoint.username}</username>
+            <password>${anypoint.password}</password>
+            <applicationName>${app.name}</applicationName>
+            <environment>${env}</environment>
+            <workerType>MICRO</workerType>
+            <region>us-east-2</region>
+            <workers>1</workers>
+            <objectStoreV2>true</objectStoreV2>
+            <!-- Start: SECURED PROPERTIES CI/CD -->
+            <properties>
+              <key>${secure.key}</key>
+            </properties>
+            <!-- End: SECURED PROPERTIES CI/CD -->
+          </cloudHubDeployment>
+          <classifier>mule-application</classifier>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+Set up the following `build.yml` at `.github/workflows`:
+
+> Make sure you replace the name of the property to match your application's property (last line of the yaml file). In this example, our key is called `secure.key`.
 
 ```yaml
 name: Build and Deploy to Sandbox
@@ -188,15 +238,13 @@ jobs:
       env:
         USERNAME: ${{ secrets.anypoint_platform_username }}
         PASSWORD: ${{ secrets.anypoint_platform_password }}
-        DECRYPTION_KEY: ${{ secrets.decryption_key }} # only needed for secured properties
+        DECRYPTION_KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn deploy -DmuleDeploy \
          -Dmule.artifact=$artifactName \
          -Danypoint.username="$USERNAME" \
          -Danypoint.password="$PASSWORD"
-      #  only needed for secured properties
-      #  make sure your key is replaced here. in this example it's secure.key
          -Dsecure.key="$DECRYPTION_KEY"
 ```
 
