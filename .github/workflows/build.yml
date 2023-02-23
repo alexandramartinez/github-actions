@@ -76,4 +76,4 @@ jobs:
          -Dmule.artifact=$artifactName \
          -Danypoint.username="$USERNAME" \
          -Danypoint.password="$PASSWORD"
-         -Dsecure.key="$DECRYPTION_KEY"
+         -Ddecryption.key="$DECRYPTION_KEY"

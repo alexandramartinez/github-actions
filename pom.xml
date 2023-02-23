@@ -44,8 +44,9 @@
 						<workers>1</workers>
 						<objectStoreV2>true</objectStoreV2>
 						<!-- Start: SECURED PROPERTIES CI/CD -->
+						<!-- Make sure `secure.key` matches with your property in the Mule app -->
 						<properties>
-							<key>${secure.key}</key>
+							<secure.key>${decryption.key}</secure.key>
 						</properties>
 						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
@@ -69,6 +70,7 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<!-- Start: SECURED PROPERTIES CI/CD -->
+		<!-- This dependency should be added to configure the global elements in your Mule app -->
 		<dependency>
 			<groupId>com.mulesoft.modules</groupId>
 			<artifactId>mule-secure-configuration-property-module</artifactId>

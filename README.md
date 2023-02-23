@@ -127,10 +127,12 @@ Add the following snippet into your application's `pom.xml`, under the `cloudHub
 
 ```xml
 <properties>
-  <key>${secure.key}</key>
+  <secure.key>${decryption.key}</secure.key>
 </properties>
 ```
 
+> **Warning**
+> 
 > Make sure you replace the name of the key to match your application's property. In this example, our key is called `secure.key`.
 
 It should look like this:
@@ -162,7 +164,7 @@ It should look like this:
             <objectStoreV2>true</objectStoreV2>
             <!-- Start: SECURED PROPERTIES CI/CD -->
             <properties>
-              <key>${secure.key}</key>
+              <secure.key>${decryption.key}</secure.key>
             </properties>
             <!-- End: SECURED PROPERTIES CI/CD -->
           </cloudHubDeployment>
@@ -175,7 +177,9 @@ It should look like this:
 
 Set up the following `build.yml` at `.github/workflows`:
 
-> Make sure you replace the name of the property to match your application's property (last line of the yaml file). In this example, our key is called `secure.key`.
+> **Note**
+> 
+> There's no need to modify the name of the property here. Only in the `pom.xml` file.
 
 ```yaml
 name: Build and Deploy to Sandbox
