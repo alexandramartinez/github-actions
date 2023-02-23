@@ -45,9 +45,9 @@
 						<objectStoreV2>true</objectStoreV2>
 						<!-- Start: SECURED PROPERTIES CI/CD -->
 						<!-- Make sure `secure.key` matches with your property in the Mule app -->
-						<secureProperties>
+						<properties>
 							<secure.key>${decryption.key}</secure.key>
-						</secureProperties>
+						</properties>
 						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
