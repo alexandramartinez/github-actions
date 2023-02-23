@@ -242,14 +242,15 @@ jobs:
       env:
         USERNAME: ${{ secrets.anypoint_platform_username }}
         PASSWORD: ${{ secrets.anypoint_platform_password }}
-        DECRYPTION_KEY: ${{ secrets.decryption_key }}
+        KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn deploy -DmuleDeploy \
          -Dmule.artifact=$artifactName \
          -Danypoint.username="$USERNAME" \
-         -Danypoint.password="$PASSWORD"
-         -Dsecure.key="$DECRYPTION_KEY"
+         -Danypoint.password="$PASSWORD" \
+         -Ddecryption.key="$KEY"
+
 ```
 
 ## Twitch streams
