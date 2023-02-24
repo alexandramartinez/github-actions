@@ -6,6 +6,11 @@ Check out the original repo: https://github.com/arch-jn/github-actions-mule-cicd
 
 Thanks [Archana](https://github.com/arch-jn) for creating these resources!!
 
+Here are some resources that I created in case you want to see more details:
+
+- [Blog post + video] [How to set up a CI/CD pipeline to deploy your MuleSoft apps to CloudHub using GitHub Actions](https://www.prostdev.com/post/how-to-set-up-a-ci-cd-pipeline-to-deploy-your-mulesoft-apps-to-cloudhub-using-github-actions).
+- [Blog post] [Part 2: CI/CD pipeline with MuleSoft and GitHub Actions - secured/encrypted properties](https://www.prostdev.com/post/part-2-ci-cd-pipeline-with-mulesoft-and-github-actions-secured-encrypted-properties)
+
 > **Note**
 > 
 > This is a simple Mule application to test. Please update the `app.name` and `env` properties from the `pom.xml` to your own.
@@ -13,8 +18,6 @@ Thanks [Archana](https://github.com/arch-jn) for creating these resources!!
 ## Instructions
 
 ### Deploy a Mule app to CloudHub (base)
-
-> For a full tutorial + video, see [How to set up a CI/CD pipeline to deploy your MuleSoft apps to CloudHub using GitHub Actions](https://www.prostdev.com/post/how-to-set-up-a-ci-cd-pipeline-to-deploy-your-mulesoft-apps-to-cloudhub-using-github-actions).
 
 Set up the following Actions Secrets in `Settings`:
 
