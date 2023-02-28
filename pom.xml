@@ -47,7 +47,7 @@
 						<!-- Start: SECURED PROPERTIES CI/CD -->
 						<!-- Make sure `secure.key` matches with your property in the Mule app -->
 						<properties>
-							<secure.key>${decryption.key}</secure.key>
+							<secure.key>${decryption_key}</secure.key>
 						</properties>
 						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
