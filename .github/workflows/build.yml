@@ -24,13 +24,11 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: 8
-    - name: Set up credentials
+    - name: Add settings.xml credentials
+      uses: s4u/maven-settings-action@v2.8.0
       env:
         USERNAME: ${{ secrets.nexus_username }}
         PASSWORD: ${{ secrets.nexus_password }}
-        KEY: ${{ secrets.decryption_key }}
-    - name: Add settings.xml credentials
-      uses: s4u/maven-settings-action@v2.8.0
       with:
         servers: |
           [{
@@ -38,30 +36,32 @@ jobs:
            "username": "$USERNAME",
            "password": "$PASSWORD"
           }]
-        # profiles: |
-        #   [{
-        #     "id": "Mule",
-        #     "activation": {
-        #       "activeByDefault": true
-        #     },
-        #     "repositories": [
-        #       {
-        #         "repository": {
-        #           "id": "MuleRepository",
-        #           "name": "MuleRepository",
-        #           "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
-        #           "layout": "default",
-        #           "releases": {
-        #             "enabled": true
-        #           },
-        #           "snapshots": {
-        #             "enabled": true
-        #           }
-        #         }
-        #       }
-        #     ]
-        #   }]
-    - name: Build with Maven
+        profiles: |
+          [{
+            "id": "Mule",
+            "activation": {
+              "activeByDefault": true
+            },
+            "repositories": [
+              {
+                "repository": {
+                  "id": "MuleRepository",
+                  "name": "MuleRepository",
+                  "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
+                  "layout": "default",
+                  "releases": {
+                    "enabled": true
+                  },
+                  "snapshots": {
+                    "enabled": true
+                  }
+                }
+              }
+            ]
+          }]
+    - name: Test with Maven
+      env:
+        KEY: ${{ secrets.decryption_key }}
       run: mvn test -Ddecryption.key="$KEY"
 
   build:
