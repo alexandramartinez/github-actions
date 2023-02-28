@@ -26,8 +26,8 @@ jobs:
         java-version: 8
     - name: Test with Maven
       env:
-        nexus.username: ${{ secrets.nexus_username }}
-        nexus.password: ${{ secrets.nexus_password }}
+        nexus_username: ${{ secrets.nexus_username }}
+        nexus_password: ${{ secrets.nexus_password }}
         decryption.key: ${{ secrets.decryption_key }}
       run: mvn test --settings .maven/settings.xml
 
