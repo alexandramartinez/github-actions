@@ -24,8 +24,8 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: 8
-    - name: Add settings.xml credentials
-      uses: whelk-io/maven-settings-xml-action@v20
+    - name: Add settings.xml
+      uses: s4u/maven-settings-action@v2.8.0
       env:
         USERNAME: ${{ secrets.nexus_username }}
         PASSWORD: ${{ secrets.nexus_password }}
@@ -36,26 +36,18 @@ jobs:
            "username": "$USERNAME",
            "password": "$PASSWORD"
           }]
-        profiles: |
+        repositories: |
           [{
-            "id": "Mule",
-            "activation": {
-              "activeByDefault": true
+            "id": "MuleRepository",
+            "name": "MuleRepository",
+            "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
+            "layout": "default",
+            "releases": {
+              "enabled": true
             },
-            "repositories": [
-              {
-                "id": "MuleRepository",
-                "name": "MuleRepository",
-                "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
-                "layout": "default",
-                "releases": {
-                  "enabled": true
-                },
-                "snapshots": {
-                  "enabled": true
-                }
-              }
-            ]
+            "snapshots": {
+              "enabled": true
+            }
           }]
     - name: Test with Maven
       env:
