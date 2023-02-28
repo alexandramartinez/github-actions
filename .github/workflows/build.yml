@@ -38,29 +38,29 @@ jobs:
            "username": "$USERNAME",
            "password": "$PASSWORD"
           }]
-        profiles: |
-          [{
-            "id": "Mule",
-            "activation": {
-              "activeByDefault": true
-            },
-            "repositories": [
-              {
-                "repository": {
-                  "id": "MuleRepository",
-                  "name": "MuleRepository",
-                  "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
-                  "layout": "default",
-                  "releases": {
-                    "enabled": true
-                  },
-                  "snapshots": {
-                    "enabled": true
-                  }
-                }
-              }
-            ]
-          }]
+        # profiles: |
+        #   [{
+        #     "id": "Mule",
+        #     "activation": {
+        #       "activeByDefault": true
+        #     },
+        #     "repositories": [
+        #       {
+        #         "repository": {
+        #           "id": "MuleRepository",
+        #           "name": "MuleRepository",
+        #           "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
+        #           "layout": "default",
+        #           "releases": {
+        #             "enabled": true
+        #           },
+        #           "snapshots": {
+        #             "enabled": true
+        #           }
+        #         }
+        #       }
+        #     ]
+        #   }]
     - name: Build with Maven
       run: mvn test -Ddecryption.key="$KEY"
 
