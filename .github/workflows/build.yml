@@ -26,15 +26,12 @@ jobs:
         java-version: 8
     - name: Add settings.xml
       uses: s4u/maven-settings-action@v2.8.0
-      env:
-        USERNAME: ${{ secrets.nexus_username }}
-        PASSWORD: ${{ secrets.nexus_password }}
       with:
         servers: |
           [{
            "id": "MuleRepository",
-           "username": "$USERNAME",
-           "password": "$PASSWORD"
+           "username": "${{ secrets.nexus_username }}",
+           "password": "${{ secrets.nexus_password }}"
           }]
         repositories: |
           [{
