@@ -49,7 +49,7 @@ jobs:
     - name: Test with Maven
       env:
         KEY: ${{ secrets.decryption_key }}
-      run: mvn test -Ddecryption.key="$KEY"
+      run: mvn test -Dsecure.key="$KEY"
 
   build:
     needs: test
