@@ -44,17 +44,15 @@ jobs:
             },
             "repositories": [
               {
-                "repository": {
-                  "id": "MuleRepository",
-                  "name": "MuleRepository",
-                  "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
-                  "layout": "default",
-                  "releases": {
-                    "enabled": true
-                  },
-                  "snapshots": {
-                    "enabled": true
-                  }
+                "id": "MuleRepository",
+                "name": "MuleRepository",
+                "url": "https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/",
+                "layout": "default",
+                "releases": {
+                  "enabled": true
+                },
+                "snapshots": {
+                  "enabled": true
                 }
               }
             ]
