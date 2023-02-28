@@ -26,9 +26,9 @@ jobs:
         java-version: 8
     - name: Test with Maven
       env:
-        nexus_username: ${{ secrets.nexus_username }}
-        nexus_password: ${{ secrets.nexus_password }}
-        decryption_key: ${{ secrets.decryption_key }}
+        nexus.username: ${{ secrets.nexus_username }}
+        nexus.password: ${{ secrets.nexus_password }}
+        decryption.key: ${{ secrets.decryption_key }}
       run: mvn test --settings .maven/settings.xml
 
   build:
@@ -90,4 +90,4 @@ jobs:
          -Dmule.artifact=$artifactName \
          -Danypoint.username="$USERNAME" \
          -Danypoint.password="$PASSWORD" \
-         -Ddecryption_key="$KEY"
+         -Ddecryption.key="$KEY"

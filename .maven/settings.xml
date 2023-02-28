@@ -8,8 +8,8 @@
   <servers>
     <server>
       <id>MuleRepository</id>
-      <username>${nexus_username}</username>
-      <password>${nexus_password}</password>
+      <username>${nexus.username}</username>
+      <password>${nexus.password}</password>
     </server>
   </servers>
 
