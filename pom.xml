@@ -17,7 +17,9 @@
 		<mule.maven.plugin.version>3.8.0</mule.maven.plugin.version>
 		<app.name>amartinez-github-actions</app.name>
 		<env>Sandbox</env>
+		<!-- Start: MUnits -->
 		<munit.version>2.3.13</munit.version>
+		<!-- End: MUnits -->
 	</properties>
 
 	<build>
@@ -54,6 +56,7 @@
 					<classifier>mule-application</classifier>
 				</configuration>
 			</plugin>
+			<!-- Start: MUnits -->
 			<plugin>
 				<groupId>com.mulesoft.munit.tools</groupId>
 				<artifactId>munit-maven-plugin</artifactId>
@@ -77,6 +80,7 @@
 					</coverage>
 				</configuration>
 			</plugin>
+			<!-- End: MUnits -->
 		</plugins>
 	</build>
 
@@ -102,6 +106,7 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<!-- End: SECURED PROPERTIES CI/CD -->
+		<!-- Start: MUnits -->
 		<dependency>
 			<groupId>com.mulesoft.munit</groupId>
 			<artifactId>munit-runner</artifactId>
@@ -122,6 +127,7 @@
 			<version>1.0.2</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- End: MUnits -->
 	</dependencies>
 
 	<repositories>
