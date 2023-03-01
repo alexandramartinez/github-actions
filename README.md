@@ -1,5 +1,7 @@
 # GitHub actions CI/CD pipeline for MuleSoft
 
+[![Build and Deploy to Sandbox](https://github.com/alexandramartinez/github-actions/actions/workflows/build.yml/badge.svg)](https://github.com/alexandramartinez/github-actions/actions/workflows/build.yml)
+
 Check out the video tutorial: https://youtu.be/vTRppGhfbPI
 
 Check out the original repo: https://github.com/arch-jn/github-actions-mule-cicd-demo
