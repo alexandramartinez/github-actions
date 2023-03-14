@@ -17,4 +17,16 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<set-payload value="#[&quot;It worked! Secured property: &quot; ++ Mule::p('secure::encrypted.property')]" doc:name="Set Payload" doc:id="5e24b1eb-3be8-49e5-99c4-c121351b519c" />
 		<logger level="INFO" doc:name="Logger" doc:id="7857a437-2749-4b60-8c7a-467eb26c74b9" message='#[payload]' />
 	</flow>
+	<sub-flow name="github-actions:test-subflow" doc:id="b254c001-61d0-4b7f-96e8-54d33f297a8d" >
+		<ee:transform doc:name="Transform Message" doc:id="fcec0227-0bfd-406c-90d8-b1ee94035301" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+if (payload != -1) {
+	"payload": payload
+} else "Received a -1"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
 </mule>

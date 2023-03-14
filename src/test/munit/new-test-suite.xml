@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite.xml" />
+	<munit:test name="new-test-suite:positive-test" doc:id="ba53de85-ffde-472e-ae23-5ac1dbab9cc2" >
+		<munit:execution >
+			<set-payload value="#[2]" doc:name="2" doc:id="d435712c-942f-4195-a4e0-0adabe440fe1" />
+			<flow-ref doc:name="test-subflow" doc:id="8bf81c8f-d196-413d-a5f7-eb2253670752" name="github-actions:test-subflow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="payload: 2" doc:id="71f6ad7b-f493-41d6-ac7d-3990aa24fd79" actual="#[payload]" expected='#[{&#10;	"payload": 2&#10;}]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="new-test-suite:negative-test" doc:id="35f503ea-f8f0-4e6f-a1bf-8114a30a0f0d" >
+		<munit:execution >
+			<set-payload value="#[-1]" doc:name="-1" doc:id="9fe2df3e-9e15-41a7-accb-7086ccba1a34" />
+			<flow-ref doc:name="test-subflow" doc:id="12bac66c-ac01-45a4-9604-d2c9fc59297e" name="github-actions:test-subflow" />
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name='"Received a -1"' doc:id="cbdfcfdc-a9e4-427e-b078-76cceb4eb6d5" actual="#[payload]" expected='#["Received a -1"]' />
+		</munit:validation>
+	</munit:test>
+
+</mule>
