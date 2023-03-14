@@ -9,9 +9,12 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a7b3edaf-37e6-4602-b796-aa108353d49c" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="12f82c4c-e292-4e0d-ba40-2197b56b6404" file="secure.properties" key="#[Mule::p('secure.key')]" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
 	<flow name="github-actionsFlow" doc:id="5913aeff-b662-42b6-8296-346c347103ea" >
 		<http:listener doc:name="Listener" doc:id="1eecd699-983f-4abf-a619-62bf0d7481dc" config-ref="HTTP_Listener_config" path="/test"/>
-		<set-payload value='#["It worked!"]' doc:name="Set Payload" doc:id="5e24b1eb-3be8-49e5-99c4-c121351b519c" />
+		<set-payload value="#[&quot;It worked! Secured property: &quot; ++ Mule::p('secure::encrypted.property')]" doc:name="Set Payload" doc:id="5e24b1eb-3be8-49e5-99c4-c121351b519c" />
 		<logger level="INFO" doc:name="Logger" doc:id="7857a437-2749-4b60-8c7a-467eb26c74b9" message='#[payload]' />
 	</flow>
 </mule>
