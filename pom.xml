@@ -17,9 +17,6 @@
 		<mule.maven.plugin.version>3.8.0</mule.maven.plugin.version>
 		<app.name>amartinez-github-actions</app.name>
 		<env>Sandbox</env>
-		<!-- Start: MUnits -->
-		<munit.version>2.3.13</munit.version>
-		<!-- End: MUnits -->
 	</properties>
 
 	<build>
@@ -46,41 +43,10 @@
 						<region>us-east-2</region>
 						<workers>1</workers>
 						<objectStoreV2>true</objectStoreV2>
-						<!-- Start: SECURED PROPERTIES CI/CD -->
-						<!-- Make sure `secure.key` matches with your property in the Mule app -->
-						<properties>
-							<secure.key>${decryption.key}</secure.key>
-						</properties>
-						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
 				</configuration>
 			</plugin>
-			<!-- Start: MUnits -->
-			<plugin>
-				<groupId>com.mulesoft.munit.tools</groupId>
-				<artifactId>munit-maven-plugin</artifactId>
-				<version>${munit.version}</version>
-				<executions>
-					<execution>
-						<id>test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>test</goal>
-							<goal>coverage-report</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<coverage>
-						<runCoverage>true</runCoverage>
-						<formats>
-							<format>html</format>
-						</formats>
-					</coverage>
-				</configuration>
-			</plugin>
-			<!-- End: MUnits -->
 		</plugins>
 	</build>
 
@@ -97,37 +63,6 @@
 			<version>1.2.2</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
-		<!-- Start: SECURED PROPERTIES CI/CD -->
-		<!-- This dependency should be added to configure the global elements in your Mule app -->
-		<dependency>
-			<groupId>com.mulesoft.modules</groupId>
-			<artifactId>mule-secure-configuration-property-module</artifactId>
-			<version>1.2.5</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<!-- End: SECURED PROPERTIES CI/CD -->
-		<!-- Start: MUnits -->
-		<dependency>
-			<groupId>com.mulesoft.munit</groupId>
-			<artifactId>munit-runner</artifactId>
-			<version>2.3.13</version>
-			<classifier>mule-plugin</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.mulesoft.munit</groupId>
-			<artifactId>munit-tools</artifactId>
-			<version>2.3.13</version>
-			<classifier>mule-plugin</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.weave</groupId>
-			<artifactId>assertions</artifactId>
-			<version>1.0.2</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- End: MUnits -->
 	</dependencies>
 
 	<repositories>
