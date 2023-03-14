@@ -20,10 +20,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Setup Maven with Java 8
-        uses: s4u/setup-maven-action@v1.7.0
-        with:
-          java-version: 8
-          maven-version: 3.8.6
+      uses: s4u/setup-maven-action@v1.7.0
+      with:
+        java-version: 8
+        maven-version: 3.8.6
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Stamp artifact file name with commit hash
@@ -55,10 +55,10 @@ jobs:
       with:
         name: artifacts
     - name: Setup Maven with Java 8
-        uses: s4u/setup-maven-action@v1.7.0
-        with:
-          java-version: 8
-          maven-version: 3.8.6
+      uses: s4u/setup-maven-action@v1.7.0
+      with:
+        java-version: 8
+        maven-version: 3.8.6
     - name: Deploy to Sandbox
       env:
         USERNAME: ${{ secrets.anypoint_platform_username }}
