@@ -9,7 +9,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a7b3edaf-37e6-4602-b796-aa108353d49c" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="12f82c4c-e292-4e0d-ba40-2197b56b6404" file="secure.properties" key="#[Mule::p('secure.key')]" >
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="12f82c4c-e292-4e0d-ba40-2197b56b6404" file="secure.properties" key="${secure.key}" >
 		<secure-properties:encrypt algorithm="Blowfish" />
 	</secure-properties:config>
 	<flow name="github-actionsFlow" doc:id="5913aeff-b662-42b6-8296-346c347103ea" >
