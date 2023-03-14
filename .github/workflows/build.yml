@@ -7,32 +7,7 @@ on:
     branches: [ main ]
     
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout this repo
-      uses: actions/checkout@v3
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: 8
-    - name: Test with Maven
-      env:
-        nexus_username: ${{ secrets.nexus_username }}
-        nexus_password: ${{ secrets.nexus_password }}
-        KEY: ${{ secrets.decryption_key }}
-      run: mvn test --settings .maven/settings.xml -Dsecure.key="$KEY"
-
   build:
-    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout this repo
@@ -50,7 +25,7 @@ jobs:
         distribution: 'zulu'
         java-version: 8
     - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipMunitTests
+      run: mvn -B package --file pom.xml
     - name: Stamp artifact file name with commit hash
       run: |
         artifactName1=$(ls target/*.jar | head -1)
@@ -86,7 +61,7 @@ jobs:
         KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
-        mvn deploy -DskipMunitTests -DmuleDeploy \
+        mvn deploy -DmuleDeploy \
          -Dmule.artifact=$artifactName \
          -Danypoint.username="$USERNAME" \
          -Danypoint.password="$PASSWORD" \
