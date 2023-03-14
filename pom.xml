@@ -43,6 +43,11 @@
 						<region>us-east-2</region>
 						<workers>1</workers>
 						<objectStoreV2>true</objectStoreV2>
+						<!-- Start: SECURED PROPERTIES CI/CD -->
+						<properties>
+							<secure.key>${decryption.key}</secure.key>
+						</properties>
+						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
 				</configuration>
