@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="new-test-suite2.xml" >
+		<!-- <munit:parameterizations >
+			<munit:parameterization name="encryption" >
+				<munit:parameters >
+					<munit:parameter propertyName="secure.key" value="MyMuleSoftKey" />
+				</munit:parameters>
+			</munit:parameterization>
+		</munit:parameterizations> -->
+	</munit:config>
+	<munit:test name="new-test-suite2Test" doc:id="b0d6f391-dc9c-4c5d-b36c-0cd0c7ebb906" >
+		<munit:execution >
+			<flow-ref doc:name="github-actionsFlow" doc:id="3cf0edc2-19da-466e-8d3d-f6514e1ea41a" name="github-actionsFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="9ae4727a-8c90-4336-aba8-04bd89ae9fa0" actual="#[payload]" expected='#["It worked! Secured property: yaaayy"]'/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

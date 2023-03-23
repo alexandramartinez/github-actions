@@ -68,6 +68,11 @@
 					</execution>
 				</executions>
 				<configuration>
+					<!-- START: MUnit coverage -->
+					<environmentVariables>
+						<secure.key>${decryption.key}</secure.key>
+					</environmentVariables>
+					<!-- END: MUnit coverage -->
 					<coverage>
 						<runCoverage>true</runCoverage>
 						<!-- START: MUnit coverage -->
