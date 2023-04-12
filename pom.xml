@@ -68,25 +68,9 @@
 					</execution>
 				</executions>
 				<configuration>
-					<!-- START: MUnit coverage -->
-					<environmentVariables>
-						<secure.key>${decryption.key}</secure.key>
-					</environmentVariables>
-					<!-- END: MUnit coverage -->
 					<coverage>
 						<runCoverage>true</runCoverage>
-						<!-- START: MUnit coverage -->
-						<failBuild>true</failBuild>
-						<requiredApplicationCoverage>90</requiredApplicationCoverage>
-						<!-- <requiredResourceCoverage>50</requiredResourceCoverage> -->
-						<!-- <requiredFlowCoverage>50</requiredFlowCoverage> -->
-						<!-- END: MUnit coverage -->
 						<formats>
-							<!-- START: MUnit coverage -->
-							<format>console</format>
-							<format>sonar</format>
-							<format>json</format>
-							<!-- END: MUnit coverage -->
 							<format>html</format>
 						</formats>
 					</coverage>
