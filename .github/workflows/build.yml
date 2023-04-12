@@ -33,8 +33,8 @@ jobs:
     - name: Upload MUnit reports
       uses: actions/upload-artifact@v3
       with:
-        name: htmlreport
-        path: HTML.html
+        name: munit-test-reports
+        path: target/site/munit/coverage/
 
   build:
     needs: test
