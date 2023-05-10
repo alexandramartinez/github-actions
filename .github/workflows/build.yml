@@ -86,13 +86,13 @@ jobs:
         name: artifacts
     - name: Deploy to Sandbox
       env:
-        USERNAME: ${{ secrets.anypoint_platform_username }}
-        PASSWORD: ${{ secrets.anypoint_platform_password }}
+        ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
+        SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
         KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn deploy -DskipMunitTests -DmuleDeploy \
          -Dmule.artifact=$artifactName \
-         -Danypoint.username="$USERNAME" \
-         -Danypoint.password="$PASSWORD" \
+         -Dclient.id="$ID" \
+         -Dclient.secret="$SECRET" \
          -Ddecryption.key="$KEY"
