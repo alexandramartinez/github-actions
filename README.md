@@ -1,6 +1,6 @@
 # GitHub actions CI/CD pipeline for MuleSoft
 
-[![Build and Deploy to Sandbox (connected-app branch)](https://github.com/alexandramartinez/github-actions/actions/workflows/build.yml/badge.svg?branch=connected-app)](https://github.com/alexandramartinez/github-actions/actions/workflows/build.yml)
+[![Build and Deploy to Sandbox (connected-app branch)](https://github.com/alexandramartinez/github-actions/actions/workflows/build.yml/badge.svg?branch=connected-app)](https://github.com/alexandramartinez/github-actions/actions/workflows/build.yml?branch=connected-app)
 
 - [Blog post + video] [Part 1: How to set up a CI/CD pipeline to deploy your MuleSoft apps to CloudHub using GitHub Actions](https://www.prostdev.com/post/how-to-set-up-a-ci-cd-pipeline-to-deploy-your-mulesoft-apps-to-cloudhub-using-github-actions)
 - [Blog post + video] [Part 2: CI/CD pipeline with MuleSoft and GitHub Actions - secured/encrypted properties](https://www.prostdev.com/post/part-2-ci-cd-pipeline-with-mulesoft-and-github-actions-secured-encrypted-properties)
