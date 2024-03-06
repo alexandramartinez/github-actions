@@ -52,7 +52,7 @@
 						<objectStoreV2>true</objectStoreV2>
 						<!-- Start: SECURED PROPERTIES CI/CD -->
 						<properties>
-							<secure.key>${decryption.key}</secure.key>
+							<secure.key>MyMuleSoftKey</secure.key>
 						</properties>
 						<!-- End: SECURED PROPERTIES CI/CD -->
 					</cloudHubDeployment>
@@ -76,7 +76,7 @@
 				<configuration>
 					<!-- START: MUnit coverage -->
 					<environmentVariables>
-						<secure.key>${decryption.key}</secure.key>
+						<secure.key>MyMuleSoftKey</secure.key>
 					</environmentVariables>
 					<!-- END: MUnit coverage -->
 					<coverage>
