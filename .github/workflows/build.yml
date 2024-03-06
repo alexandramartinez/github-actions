@@ -1,79 +1,79 @@
-name: Build and Deploy to Sandbox
+# This is a basic workflow to help you get started with Actions
 
+name: CICD for Cloudhub apps
+
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ connected-app ]
-    
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout this repo
-      uses: actions/checkout@v3
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: 8
-    - name: Test with Maven
-      env:
-        nexus_username: ${{ secrets.nexus_username }}
-        nexus_password: ${{ secrets.nexus_password }}
-        KEY: ${{ secrets.decryption_key }}
-      run: mvn test --settings .maven/settings.xml -Dsecure.key="$KEY"
-    - name: Upload MUnit reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: munit-test-reports
-        path: target/site/munit/coverage/
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
   build:
-    needs: test
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: Checkout this repo
-      uses: actions/checkout@v3
-    - name: Cache dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'zulu'
-        java-version: 8
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml -DskipMunitTests
-    - name: Stamp artifact file name with commit hash
-      run: |
-        artifactName1=$(ls target/*.jar | head -1)
-        commitHash=$(git rev-parse --short "$GITHUB_SHA")
-        artifactName2=$(ls target/*.jar | head -1 | sed "s/.jar/-$commitHash.jar/g")
-        mv $artifactName1 $artifactName2
-    - name: Upload artifact 
-      uses: actions/upload-artifact@v3
-      with:
-          name: artifacts
-          path: target/*.jar
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      # Caches dependencies and build outputs to improve workflow execution time.
+      - uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'
+          cache: 'maven'
+          
+      - uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: |
+            [{
+                "id": "anypoint-exchange-v3",
+                "username": "${{ secrets.ANYPOINT_USERNAME }}",
+                "password": "${{ secrets.ANYPOINT_PASSWORD }}"
+            }
+            ]
+          
+      # maven build command, could add other flags if needed
+      - name: Build
+        run: mvn -B package --file check-in-papi-app/pom.xml
         
+      - name: Stamp artifact file name with commit hash
+        run: |
+          artifactName1=$(ls check-in-papi-app/target/*.jar | head -1)
+          commitHash=$(git rev-parse --short "$GITHUB_SHA")
+          artifactName2=$(ls check-in-papi-app/target/*.jar | head -1 | sed "s/.jar/.$commitHash.jar/g")
+          mv $artifactName1 $artifactName2
+          
+      # save the produced jar file to be deployed later    
+      - uses: actions/upload-artifact@v3
+        with:
+            name: artifacts
+            path: check-in-papi-app/target/*.jar
+            
+            
+# Steps for executing the deployment against Cloudhub Anypoint Platform
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:    
-    - name: Checkout this repo
-      uses: actions/checkout@v3
-    - name: Cache dependencies
-      uses: actions/cache@v3
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -82,15 +82,25 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: artifacts
-    - name: Deploy to Sandbox
+
+    - uses: s4u/maven-settings-action@v2.6.0
+      with:
+        servers: |
+          [{
+                "id": "anypoint-exchange-v3",
+                "username": "${{ secrets.ANYPOINT_USERNAME }}",
+                "password": "${{ secrets.ANYPOINT_PASSWORD }}"
+            }
+          ]
+          
+    - name: Deploy to CloudHub
       env:
-        ID: ${{ secrets.CONNECTED_APP_CLIENT_ID }}
-        SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
-        KEY: ${{ secrets.decryption_key }}
+        AUTHOR: "Mario Korac"
       run: |
         artifactName=$(ls *.jar | head -1)
-        mvn deploy -DskipMunitTests -DmuleDeploy \
-         -Dmule.artifact=$artifactName \
-         -Dclient.id="$ID" \
-         -Dclient.secret="$SECRET" \
-         -Ddecryption.key="$KEY"
+        mvn --file check-in-papi-app/pom.xml deploy -DmuleDeploy \
+        -DapplicationName="checkin-cicd-mario-training" \
+        -Denvironment="dev" \
+        -Dencrypt.key="${{ secrets.ENCRYPT_KEY }}" \
+        -Dclient_id="${{ secrets.AP_CLIENTID }}" \
+        -Dclient_secret="${{ secrets.AP_CLIENTSECRET }}"
