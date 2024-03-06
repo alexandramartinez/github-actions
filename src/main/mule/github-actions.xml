@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</secure-properties:config>
 	<flow name="github-actionsFlow" doc:id="5913aeff-b662-42b6-8296-346c347103ea" >
 		<http:listener doc:name="Listener" doc:id="1eecd699-983f-4abf-a619-62bf0d7481dc" config-ref="HTTP_Listener_config" path="/test"/>
-		<set-payload value="#[&quot;It worked! Secured property: &quot; ++ Mule::p('secure::encrypted.property')]" doc:name="Set Payload" doc:id="5e24b1eb-3be8-49e5-99c4-c121351b519c" />
+		<set-payload value='#["Hello world"]' doc:name="Set Payload" doc:id="5e24b1eb-3be8-49e5-99c4-c121351b519c" />
 		<logger level="INFO" doc:name="Logger" doc:id="7857a437-2749-4b60-8c7a-467eb26c74b9" message='#[payload]' />
 	</flow>
 	<sub-flow name="github-actions:test-subflow" doc:id="b254c001-61d0-4b7f-96e8-54d33f297a8d" >
