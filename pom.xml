@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
@@ -36,8 +38,7 @@
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${app.runtime}</muleVersion>
-						<!-- <username>${anypoint.username}</username>
-						<password>${anypoint.password}</password> -->
+						<!-- <username>${anypoint.username}</username> <password>${anypoint.password}</password> -->
 						<!-- Start: CONNECTED APP -->
 						<connectedAppClientId>${client.id}</connectedAppClientId>
 						<connectedAppClientSecret>${client.secret}</connectedAppClientSecret>
@@ -82,7 +83,7 @@
 						<runCoverage>true</runCoverage>
 						<!-- START: MUnit coverage -->
 						<failBuild>true</failBuild>
-    					<requiredApplicationCoverage>90</requiredApplicationCoverage>
+						<requiredApplicationCoverage>90</requiredApplicationCoverage>
 						<!-- <requiredResourceCoverage>50</requiredResourceCoverage> -->
 						<!-- <requiredFlowCoverage>50</requiredFlowCoverage> -->
 						<!-- END: MUnit coverage -->
@@ -138,6 +139,13 @@
 			<artifactId>assertions</artifactId>
 			<version>1.0.2</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>874a8c54-bea0-414c-b1f1-ba80f14c91e0</groupId>
+			<artifactId>dyn-sys-api</artifactId>
+			<version>1.0.0</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
 		</dependency>
 	</dependencies>
 
