@@ -40,8 +40,8 @@
 						<muleVersion>${app.runtime}</muleVersion>
 						<!-- <username>${anypoint.username}</username> <password>${anypoint.password}</password> -->
 						<!-- Start: CONNECTED APP -->
-						<connectedAppClientId>${client.id}</connectedAppClientId>
-						<connectedAppClientSecret>${client.secret}</connectedAppClientSecret>
+						<connectedAppClientId>a70d9f69d28147db908cfe20704fd85e</connectedAppClientId>
+						<connectedAppClientSecret>5cFB5142346E49A1a888A83b795C8F88</connectedAppClientSecret>
 						<connectedAppGrantType>client_credentials</connectedAppGrantType>
 						<!-- End: CONNECTED APP -->
 						<applicationName>${app.name}</applicationName>
