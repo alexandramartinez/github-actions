@@ -14,7 +14,7 @@
 
 Different examples are being demonstrated per branch. Here's the summary of each.
 
-|| `main` | `connected-app` | `cloudhub2`
+||[`main`](https://github.com/alexandramartinez/github-actions/tree/main)|[`connected-app`](https://github.com/alexandramartinez/github-actions/tree/connected-app)|[`cloudhub2`](https://github.com/alexandramartinez/github-actions/tree/cloudhub2)
 |-|-|-|-
 |Deployment|CH1|CH1|CH2
 |Passing secured properties|✅|✅|✅
