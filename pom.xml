@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>4500658a-7637-4fcf-bc7d-51d1feb28edb</groupId> <!-- make sure to add your business group ID here -->
 	<artifactId>github-actions</artifactId>
-	<version>1.0.9</version> <!-- this has to change EVERY TIME you want to re-deploy -->
+	<version>1.0.10</version> <!-- this has to change EVERY TIME you want to re-deploy -->
 	<packaging>mule-application</packaging>
 	<name>github-actions</name>
 	<properties>
@@ -11,6 +11,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mule.maven.plugin.version>4.1.1</mule.maven.plugin.version> <!-- use at least v4.1.0 -->
 		<env>Sandbox</env>
+		<releaseChannel>NONE</releaseChannel> <!-- use `NONE` for Mule Runtime 4.4 or `LTS`/`EDGE` for 4.6+ -->
 		<region>Cloudhub-US-East-2</region> <!-- make sure it's one of these Target Names: https://docs.mulesoft.com/cloudhub-2/ch2-architecture#regions-and-dns-records -->
 			<!-- note: free trial accounts only have access to Cloudhub-US-East-2 -->
 		<serverId>Repository</serverId> <!-- can be whatever you want, just make sure it matches the settings.xml -->
@@ -38,7 +39,7 @@
                         <target>${region}</target>
                         <server>${serverId}</server> <!-- this is where our credentials will be stored -->
                         <applicationName>${project.artifactId}</applicationName>
-						<releaseChannel>NONE</releaseChannel>
+						<releaseChannel>${releaseChannel}</releaseChannel>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
                         <deploymentSettings>
@@ -46,7 +47,7 @@
                         </deploymentSettings>
                         <!-- Start: SECURED PROPERTIES CI/CD -->
 						<secureProperties>
-							<secure.key>${decryption.key}</secure.key>
+							<secure.key>${decryption.key}</secure.key> <!-- this comes from the build.yml / github secrets -->
 						</secureProperties>
 						<!-- End: SECURED PROPERTIES CI/CD -->
 
