@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>4500658a-7637-4fcf-bc7d-51d1feb28edb</groupId> <!-- make sure to add your business group ID here -->
 	<artifactId>github-actions</artifactId>
-	<version>1.0.3</version> <!-- this has to change EVERY TIME you want to re-deploy -->
+	<version>1.0.4</version> <!-- this has to change EVERY TIME you want to re-deploy -->
 	<packaging>mule-application</packaging>
 	<name>github-actions</name>
 	<properties>
@@ -11,7 +11,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mule.maven.plugin.version>4.1.1</mule.maven.plugin.version> <!-- use at least v4.1.0 -->
 		<env>Sandbox</env>
-		<muleVersion>4.4-java8</muleVersion>
+		<muleVersion>4.6-java8</muleVersion> <!-- for previous runtimes, use a previous mule maven plugin version -->
 		<region>Cloudhub-US-East-2</region> <!-- make sure it's one of these Target Names: https://docs.mulesoft.com/cloudhub-2/ch2-architecture#regions-and-dns-records -->
 			<!-- note: free trial accounts only have access to Cloudhub-US-East-2 -->
 		<serverId>Repository</serverId> <!-- can be whatever you want, just make sure it matches the settings.xml -->
