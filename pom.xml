@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>4500658a-7637-4fcf-bc7d-51d1feb28edb</groupId> <!-- make sure to add your business group ID here -->
 	<artifactId>github-actions</artifactId>
-	<version>1.0.8</version> <!-- this has to change EVERY TIME you want to re-deploy -->
+	<version>1.0.9</version> <!-- this has to change EVERY TIME you want to re-deploy -->
 	<packaging>mule-application</packaging>
 	<name>github-actions</name>
 	<properties>
@@ -38,7 +38,7 @@
                         <target>${region}</target>
                         <server>${serverId}</server> <!-- this is where our credentials will be stored -->
                         <applicationName>${project.artifactId}</applicationName>
-						<releaseChannel>LTS</releaseChannel>
+						<releaseChannel>NONE</releaseChannel>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
                         <deploymentSettings>
