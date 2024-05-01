@@ -47,3 +47,5 @@ target/
 .DS_Store
 velocity.log
 reports/
+.tooling-project
+.vscode/settings.json
