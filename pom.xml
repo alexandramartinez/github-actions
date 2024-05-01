@@ -12,7 +12,8 @@
 		<app.runtime>4.4.0</app.runtime>
 		<mule.maven.plugin.version>4.1.1</mule.maven.plugin.version> <!-- use at least v4.1.0 -->
 		<env>Sandbox</env>
-		<region>Cloudhub-US-East-1</region> <!-- make sure it's one of these Target Names: https://docs.mulesoft.com/cloudhub-2/ch2-architecture#regions-and-dns-records -->
+		<region>Cloudhub-US-East-2</region> <!-- make sure it's one of these Target Names: https://docs.mulesoft.com/cloudhub-2/ch2-architecture#regions-and-dns-records -->
+			<!-- note: free trial accounts only have access to Cloudhub-US-East-2 -->
 		<serverId>Repository</serverId> <!-- can be whatever you want, just make sure it matches the settings.xml -->
 		<munit.version>3.1.0</munit.version>
 	</properties>
