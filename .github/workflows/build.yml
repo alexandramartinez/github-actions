@@ -29,11 +29,10 @@ jobs:
           mvn deploy --settings .maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
-          -Ddecryption.key="${{ secrets.DECRYPTION_KEY }}"
 
       - name: Deploy to CloudHub 2.0
         run: |
           mvn deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
-          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+          -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
           -Ddecryption.key="${{ secrets.DECRYPTION_KEY }}"
